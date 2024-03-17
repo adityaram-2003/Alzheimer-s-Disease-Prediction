@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alzheimer's Disease Prediction</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-image: url('https://news.mit.edu/sites/default/files/styles/news_article__image_gallery/public/images/202211/Continuous_Time_Networks_2.png?itok=DcFDsuyz');
+        background-size: cover;
+        color: #FFFFFF;
+        overflow: hidden;
+    }
+    .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        border-radius: 25px;
+        border: 2px solid black ;
+        padding: 20px;
+    }
+    .header-bar {
+        background-color: #6D9197;
+        padding: 10px 0;
+    }
+    h1 {
+        font-family: Courier New, monospace;
+        font-size: 36px;
+    }
+    h2, p {
+        font-size: 18px;
+    }
+    input[type="file"] {
+        color: #FFFFFF;
+        display: none;
+    }
+    #file-input-label {
+        color: #000000;
+        background-color: #C4CDC1;
+        padding: 10px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    #file-label-container {
+        margin-top: 20px;
+    }
+    #evaluate-btn {
+        background-color: #C4CDC1;
+        color: #000000;
+        border: none;
+        padding: 10px 20px;
+        font-size: 18px;
+        border-radius: 10px;
+        cursor: pointer;
+        position: fixed;
+        bottom: 130px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    #info-window {
+        position: fixed;
+        top: 20%;
+        right: 0;
+        width: 20%;
+        max-height: 80%;
+        overflow-y:hidden;
+        background-color: rgba(109, 145, 151, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        border-style: solid;
+        border-color: white;
+        text-align: justify;
+        text-justify:auto;  
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-bar">
+        <h1>Alzheimer's Disease Prediction</h1>
+        <p>This webpage allows you to upload a dataset file and execute Alzheimer's Disease Prediction.</p>
+        <form id="upload-form" action="/evaluate" method="post" enctype="multipart/form-data">
+            <label for="dataset">Please Enter Parameters</label><br>
+            <input type="file" name="dataset" id="dataset" accept=".csv">
+            <label for="air_time1">Air Time:</label><br>
+            <input type="number" name="air_time1" id="air_time1" step="0.01" required placeholder="Value less than 5000"><br>
+            <label for="disp_index1">Disp Index:</label><br>
+            <input type="number" name="disp_index1" id="disp_index1" step="0.01" required placeholder="Value upto 8 decimals"><br>
+            <label for="num_of_pendown1">Num of Pendown:</label><br>
+            <input type="number" name="num_of_pendown1" id="num_of_pendown1" step="0.01" required placeholder="Value less than 50"><br>
+            <label for="paper_time1">Paper Time:</label><br>
+            <input type="number" name="paper_time1" id="paper_time1" step="0.01" required placeholder="Value less than 10000"><br>
+            <label for="pressure_var1v">Pressure Var:</label><br>
+            <input type="number" name="pressure_var1v" id="pressure_var1v" step="0.01" required placeholder="Value less than 200000"><br>
+            <label for="total_time1">Total Time:</label><br>
+            <input type="number" name="total_time1" id="total_time1" step="0.01" required placeholder="Value less than 50000"><br>
+        </form>
+        
+        
+    </div><br><br>
+</div>
+
+<button type="button" id="evaluate-btn">Evaluate Model</button>
+
+
+<script>
+    document.getElementById('dataset').addEventListener('change', function(){
+        var fileInput = document.getElementById('dataset');
+        var fileLabel = document.querySelector('#file-label-container label');
+        fileLabel.textContent = fileInput.files[0].name || 'No file chosen';
+    });
+
+    document.getElementById('evaluate-btn').addEventListener('click', function(){
+        document.getElementById('upload-form').submit();
+    });
+</script>
+
+</body>
+</html>
